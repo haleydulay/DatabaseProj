@@ -1,3 +1,12 @@
+/*
+Input:
+R, a list of records sorted in increasing temporal order.
+0s, a threshold to make merge decision
+Output:
+C, the clustering of records in R
+Sc, the set of cluster signatures corresponding to C, each cluster in C has a signature in Sc.
+*/
+
 #include <iostream>
 #include <vector>
 
