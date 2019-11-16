@@ -14,11 +14,12 @@ using namespace std;
 
 int main()
 {
+vector<string> R;
 vector<string> C; // C={}
 
-for(i=0;i<records.size();i++) // for all r in R do
+for(i=0;i<R.size();i++) // for all r in R do
 {
-        for(j=0;j<clusters.size();j++)  // for all C in C do
+        for(j=0;j<C.size();j++)  // for all C in C do
         {
         // compute sims(r,C)
         }
