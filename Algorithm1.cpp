@@ -12,10 +12,18 @@ Sc, the set of cluster signatures corresponding to C, each cluster in C has a si
 
 using namespace std;
 
+struct output                   // might need this to return C, Sc or maybe make another vector
+{
+       
+}
+
 int main()
 {
 vector<string> R;
 vector<string> C; // C={}
+vector<string> Sc;
+vector<string> Cmax;
+vecotr<string> Scmax;
 
 for(i=0;i<R.size();i++) // for all r in R do
 {
@@ -26,17 +34,17 @@ for(i=0;i<R.size();i++) // for all r in R do
         if(//maxC in csims(r,C)>=0s   if true, then merge to the next possible cluster)
         {
         //Cmax = arg max C in c sims(r,C)
-        //Cmax <- Cmax union r          append r to Cmax
+        Cmax.push_back(R[i]);           //Cmax <- Cmax union r          append r to Cmax
         //r1 <- arg max r in C r.t      O(1) since sorted by time
-        //sCmax <- sCmax \ r1           remove the last record
-        //sCmax <- sCmax unior r        append r as the last record
+        Scmax.pop_back();                //sCmax <- sCmax \ r1           remove the last record
+        Scmax.push_back(R[i]);          //sCmax <- sCmax unior r        append r as the last record
         }
         else
-        {
-        // Cmax = {r}           // create a new cluster
-        // sCmax = {r}          // initialize the signature for Cmax
-        // C <- C union Cmax
-        // Sc <- Sc union sCmax
+        {      
+        Cmax = R[i];           // create a new cluster             cmax = {R}
+        Scmax = R[i];           // sCmax = {r}          // initialize the signature for Cmax
+        C.push_back(Cmax);                       // C <- C union Cmax
+        Sc.push_back(Scmax);                       // Sc <- Sc union sCmax
         }
 }
 
