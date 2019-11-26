@@ -23,7 +23,7 @@ vector<string> R;
 vector<string> C; // C={}
 vector<string> Sc;
 vector<string> Cmax;
-vecotr<string> Scmax;
+vector<string> Scmax;
 
 for(i=0;i<R.size();i++) // for all r in R do
 {
