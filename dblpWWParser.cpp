@@ -14,15 +14,16 @@ using namespace std;
 
 int main(){
 
-    ifstream theFile("sampledblp.xml");
+    ifstream theFile("dblp.xml");
     vector<char> buffer((istreambuf_iterator<char>(theFile)), istreambuf_iterator<char>());
     buffer.push_back('\0');
-    cout << "XML loaded" << endl;
+
 
     xml_document<> doc;
     doc.parse<0>(&buffer[0]);
     xml_node<> * root_node = doc.first_node("dblp");
 
+    int counter = 0;
 
 
     //iterate over the dblp article entries
@@ -32,18 +33,22 @@ int main(){
         for(xml_node<> * title_node= article_node->first_node(); title_node; title_node = title_node->next_sibling())
         {   
                 char* author = title_node->value();
-                //cout << author << endl;
-                if(strcmp(author, "Yuval Yarom") == 0){ //edit for "Wei Wang"
-                    cout << title_node->value() << endl;
-                    for(xml_node<> * found_node= article_node->first_node(); found_node; found_node = found_node->next_sibling()){
-                        cout << found_node->value() << endl;
-                    }
-                }
-        
+   
+                if(strcmp(author, "Wei Wang") == 0){ 
+                    counter += 1;
+          
+                    for(xml_node<> * found_node= article_node->first_node("author"); found_node; found_node = found_node->next_sibling()){
+                        char* type = found_node->name();
 
+                        if(strcmp(type,"author") == 0){
+                            cout << found_node->value() << endl;
+                        }
+                    }
+                    cout << "\n";
+                }
         }
-        
     }
 
+    cout << "number of records: " << counter << endl;
 
 }
