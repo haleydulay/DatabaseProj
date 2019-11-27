@@ -8,10 +8,12 @@ Sc, the set of cluster signatures corresponding to C, each cluster in C has a si
 */
 
 #include <iostream>
+#include <cstdio>
 #include <vector>
 #include <fstream>
 #include <string>
 #include <time>
+#include <ctime>
 #define DBLP-WW 738
 #define DBLP-100K 103059
 
@@ -27,9 +29,9 @@ int main()
 {
 ifstream file;
 int index = 0;
-unsigned long long int beg = 0;
-unsigned long long int end = 0;
-unsigned long long int elapsedtime = 0;
+clock_t beg = 0;
+clock_t end = 0;
+unsigned long long int elapsedtime = 0;     // might be a double
 int type;
 int record_count = 0;
 string line;
@@ -155,11 +157,11 @@ else if(experiment==t2)
         file.close();
     }
 
-    beg = (unsigned long long int)clock();
-    end = (unsigned long long int)clock();
+    beg = clock();
+    end = clock();
 
-    elapsedtime = end-beg;
-    cout << "Scalability experiments on 10% of DBLP-100K had an execution time of: "<< elapsedtime << " hours" << endl;
+    elapsedtime = (end-beg) / (unsigned long long int)CLOCKS_PER_SEC;       // might be a double & its gonna give seconds i think
+    cout << "Scalability experiments on 10% of DBLP-100K had an execution time of about: "<< elapsedtime << " hours" << endl;
 
     return out;
 }
