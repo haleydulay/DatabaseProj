@@ -159,7 +159,7 @@ else if(experiment==t2)
     end = (unsigned long long int)clock();
 
     elapsedtime = end-beg;
-    cout << "Scalability experiments on 10% of DBLP-100K had an execution time of: "<< elapsed time << " hours" << endl;
+    cout << "Scalability experiments on 10% of DBLP-100K had an execution time of: "<< elapsedtime << " hours" << endl;
 
     return out;
 }
