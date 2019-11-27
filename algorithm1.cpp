@@ -14,8 +14,8 @@ Sc, the set of cluster signatures corresponding to C, each cluster in C has a si
 #include <string>
 #include <time>
 #include <ctime>
-#define DBLP-WW 738
-#define DBLP-100K 103059
+#define DBLP-WW 1314
+#define DBLP-100K 100000
 
 using namespace std;
 
@@ -72,9 +72,9 @@ if(experiment==t1)
     }
     file.close();
     
-    for(i=0;i<R.size();i++) // for all r in R do    //can change the size to DBLP-WW possibly if not exact # of records
+    for(int i=0;i<R.size();i++) // for all r in R do    //can change the size to DBLP-WW possibly if not exact # of records
     {
-        for(j=0;j<C.size();j++)  // for all C in C do
+        for(int j=0;j<C.size();j++)  // for all C in C do
         {
             // compute sims(r,C)
         }
