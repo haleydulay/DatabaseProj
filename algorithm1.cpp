@@ -44,7 +44,7 @@ if(experiment==t1)
 
     // Storing records from text file   
     if(!file.isopen())
-        cout << "Unable to open file << endl;"
+        cout << "Unable to open file" << endl;
     else
     {
         while(!file.eof())
