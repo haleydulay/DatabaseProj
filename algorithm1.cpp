@@ -14,8 +14,8 @@ Sc, the set of cluster signatures corresponding to C, each cluster in C has a si
 #include <string>
 #include <time>
 #include <ctime>
-#define DBLP-WW 1314
-#define DBLP-100K 100000
+#define DBLP-WW 738
+#define DBLP-100K 103059
 
 using namespace std;
 
