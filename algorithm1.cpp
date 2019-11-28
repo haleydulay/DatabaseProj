@@ -12,10 +12,10 @@ Sc, the set of cluster signatures corresponding to C, each cluster in C has a si
 #include <vector>
 #include <fstream>
 #include <string>
-#include <time>
 #include <ctime>
-#define DBLP-WW 738
-#define DBLP-100K 103059
+#include <cstring>
+#define DBLPWW 738
+#define DBLP100K 103059
 
 using namespace std;
 
@@ -23,7 +23,7 @@ struct output
 {
 vector<string> C;
 vector<string> Sc;
-}
+};
 
 int main()
 {
@@ -48,30 +48,27 @@ cin >> experiment;
 // Matching Accuracy Experiment
 if(experiment==t1)
 {
-    vector<vector<string> > R(DBLP-WW);
+    vector<vector<string> > R(DBLPWW);
     file.open("dblpWW.txt");
 
     // Storing records from text file   
-    if(!file.isopen())
+    if(!file.is_open())
         cout << "Unable to open file" << endl;
     else
     {
         while(!file.eof())
         {
             getline(file,line);
-            if(line!='\n')
-            {
-                //idk how to push it back into the 2d vector tbh
-            }
+            if(line!="\n")
+		        R[index].push_back(line);
             else
-            {
-                // skip over to the next index of vector to signify the end of a record.
                 index += 1;
-            } 
         }  
     }
     file.close();
-    
+
+cout << R[0][0] << endl;
+/*    
     for(int i=0;i<R.size();i++) // for all r in R do    //can change the size to DBLP-WW possibly if not exact # of records
     {
         for(int j=0;j<C.size();j++)  // for all C in C do
@@ -95,9 +92,12 @@ if(experiment==t1)
         }   
     }
     return out;       // return C, Sc
+*/
+return 0;
 }
 // -------------------------------------------------------------------------------------------------------------------
 // Run-Time Experiment
+/*
 else if(experiment==t2)
 {
     cout << "Enter '0' if you would like to do 10% of the DBLP-100K dataset or '1' for its entirety: ";
@@ -105,11 +105,11 @@ else if(experiment==t2)
 
     if(type==0)
     {
-        vector<vector<string> > R((DBLP-100K/10));
+        vector<vector<string> > R((DBLP100K/10));
         file.open("dblp100K.txt");
     
         // Storing records from text file   
-        if(!file.isopen())
+        if(!file.is_open())
             cout << "Unable to open file" << endl;
         else
         {
@@ -133,7 +133,7 @@ else if(experiment==t2)
     }
     else if(type==1)
     {
-    vector<vector<string> > R(DBLP-100K);
+    vector<vector<string> > R(DBLP100K);
     file.open("dblp100K.txt");
     
         // Storing records from text file   
@@ -165,3 +165,6 @@ else if(experiment==t2)
 
     return out;
 }
+*/ 
+}
+
