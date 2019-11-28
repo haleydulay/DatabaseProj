@@ -60,7 +60,7 @@ if(experiment==t1)
         {
             getline(file,line);
             if(line!="\n")
-		        R[index].push_back(line);
+		R[index].push_back(line);
             else
                 index += 1;
         }  
