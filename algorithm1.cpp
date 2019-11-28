@@ -33,7 +33,6 @@ clock_t beg = 0;
 clock_t end = 0;
 unsigned long long int elapsedtime = 0;     // might be a double
 int type;
-int record_count = 0;
 string line;
 string experiment;
 string t1 = "Matching-Accuracy";
@@ -58,16 +57,22 @@ if(experiment==t1)
     {
         while(!file.eof())
         {
-            getline(file,line);
-            if(line!="\n")
-		R[index].push_back(line);
+		    if(file.peek()!='\n')
+		    {
+                getline(file,line);
+    		    R[index].push_back(line);
+		    }
             else
+		    {
+			    getline(file,line);
                 index += 1;
+			    if(index==DBLPWW)
+				    break;
+		    }
         }  
     }
     file.close();
 
-cout << R[0][0] << endl;
 /*    
     for(int i=0;i<R.size();i++) // for all r in R do    //can change the size to DBLP-WW possibly if not exact # of records
     {
@@ -115,18 +120,18 @@ else if(experiment==t2)
         {
             while(!file.eof())
             {
-                getline(file,line);
-                if(line!='\n')
+                if(file.peek()!='\n')
                 {
-                    //idk how to push it back into the 2d vector tbh
+                	getletline(file,line);
+			        R[index].push_back(line);    
                 }
                 else
                 {
-                    recourd_count += 1;
-                    // skip over to the next index of vector to signify the end of a record.
+                	index += 1;
+			        getline(file,line);
+			        if(index==(DBLP100K/10))
+				        break;
                 }
-                if(record_count >= DBLP-100K/10)
-                    break;
             }   
         }   
         file.close();
@@ -137,20 +142,23 @@ else if(experiment==t2)
     file.open("dblp100K.txt");
     
         // Storing records from text file   
-        if(!file.isopen())
+        if(!file.is_open())
             cout << "Unable to open file" << endl;
         else
         {
             while(!file.eof())
             {
-                getline(file,line);
-                if(line!='\n')
-                {
-                    //idk how to push it back into the 2d vector tbh
+		        if(file.peek()!='\n')
+		        {
+                	getline(file,line);
+			        R[index].push_back(line);
                 }
                 else
                 {
-                    // skip over to the next index of vector to signify the end of a record.
+                	index += 1;
+			        getline(file,line);
+			        if(index==DBLP100K)
+				        break;
                 }
             }
         }   
