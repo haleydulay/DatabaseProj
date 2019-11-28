@@ -57,18 +57,18 @@ if(experiment==t1)
     {
         while(!file.eof())
         {
-		    if(file.peek()!='\n')
-		    {
-                getline(file,line);
-    		    R[index].push_back(line);
-		    }
-            else
-		    {
-			    getline(file,line);
-                index += 1;
-			    if(index==DBLPWW)
-				    break;
-		    }
+		if(file.peek()!='\n')
+		{
+                	getline(file,line);
+    		    	R[index].push_back(line);
+		}
+            	else
+		{
+			getline(file,line);
+                	index += 1;
+			if(index==DBLPWW)
+				break;
+		}
         }  
     }
     file.close();
@@ -123,14 +123,14 @@ else if(experiment==t2)
                 if(file.peek()!='\n')
                 {
                 	getletline(file,line);
-			        R[index].push_back(line);    
+			R[index].push_back(line);    
                 }
                 else
                 {
                 	index += 1;
-			        getline(file,line);
-			        if(index==(DBLP100K/10))
-				        break;
+			getline(file,line);
+			if(index==(DBLP100K/10))
+				break;
                 }
             }   
         }   
@@ -146,21 +146,21 @@ else if(experiment==t2)
             cout << "Unable to open file" << endl;
         else
         {
-            while(!file.eof())
-            {
-		        if(file.peek()!='\n')
+		while(!file.eof())
+            	{
+			if(file.peek()!='\n')
 		        {
-                	getline(file,line);
+                		getline(file,line);
 			        R[index].push_back(line);
-                }
-                else
-                {
-                	index += 1;
-			        getline(file,line);
-			        if(index==DBLP100K)
-				        break;
-                }
-            }
+                	}
+                	else
+                	{
+                		index += 1;
+				getline(file,line);
+				if(index==DBLP100K)
+					break;
+                	}
+            	}
         }   
         file.close();
     }
