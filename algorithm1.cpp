@@ -73,7 +73,7 @@ if(experiment==t1)
     }
     file.close();
 
-/*    
+
     for(int i=0;i<R.size();i++) // for all r in R do    //can change the size to DBLP-WW possibly if not exact # of records
     {
         for(int j=0;j<C.size();j++)  // for all C in C do
@@ -97,9 +97,32 @@ if(experiment==t1)
         }   
     }
     return out;       // return C, Sc
-*/
+
 return 0;
 }
+
+double cluster_similarity(int r, int c, output out)
+    int num_SC = sizeof(out.Sc);
+    int result = 0
+    for(int r2 = 0; r2 < sc.size(); r2++){  //for every r' in SC
+        result += record_similarity(r, r2); //compute record_sim(r, r')
+    return result / num_SC;                 //return average (result divided by num of signatures)
+        
+    }
+}
+
+double record_similarity(int record){
+    //for(int a = 0; a < )    //for every attribute a in A
+        //compute sima(r, r')
+    //divide computed average by number of attributes
+    //return result
+
+}
+
+
+
+
+
 // -------------------------------------------------------------------------------------------------------------------
 // Run-Time Experiment
 /*
@@ -107,7 +130,6 @@ else if(experiment==t2)
 {
     cout << "Enter '0' if you would like to do 10% of the DBLP-100K dataset or '1' for its entirety: ";
     cin >> type;
-
     if(type==0)
     {
         vector<vector<string> > R((DBLP100K/10));
@@ -164,15 +186,12 @@ else if(experiment==t2)
         }   
         file.close();
     }
-
     beg = clock();
     end = clock();
-
     elapsedtime = (end-beg) / (unsigned long long int)CLOCKS_PER_SEC;       // might be a double & its gonna give seconds i think
     cout << "Scalability experiments on 10% of DBLP-100K had an execution time of about: "<< elapsedtime << " hours" << endl;
-
     return out;
 }
-*/ 
+ 
 }
-
+*/
