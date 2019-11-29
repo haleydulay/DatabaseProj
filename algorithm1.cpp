@@ -101,21 +101,21 @@ if(experiment==t1)
 return 0;
 }
 
-double cluster_similarity(int r, int c, output out)
+double cluster_similarity(vector<string> r, int c, output out)
     int num_SC = sizeof(out.Sc);
-    int result = 0
-    for(int r2 = 0; r2 < sc.size(); r2++){  //for every r' in SC
+    double result = 0
+    for(int r2 = 0; r2 < num_SC; r2++){  //for every r' in SC
         result += record_similarity(r, r2); //compute record_sim(r, r')
     return result / num_SC;                 //return average (result divided by num of signatures)
         
     }
 }
 
-double record_similarity(int record){
-    //for(int a = 0; a < )    //for every attribute a in A
-        //compute sima(r, r')
-    //divide computed average by number of attributes
-    //return result
+double record_similarity(int r1, int r2){
+    double result = 0
+    for(int a = 0; a < r.size(); a++)    //for every attribute a in A
+        //result += compute sima(r, r')
+    return result / r.size();               //divide computed average by number of attributes
 
 }
 
