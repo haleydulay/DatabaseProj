@@ -76,9 +76,9 @@ if(experiment==t1)
 
     for(int i=0;i<R.size();i++) // for all r in R do    //can change the size to DBLP-WW possibly if not exact # of records
     {
-        for(int j=0;j<C.size();j++)  // for all C in C do
+        for(int j=0;j<out.C.size();j++)  // for all C in C do
         {
-            // compute sims(r,C)
+        	cluster_similarity(R[i],out.C[j]);
         }
         if(//maxC in csims(r,C)>=0s   if true, then merge to the next possible cluster)
         {
@@ -103,7 +103,7 @@ return 0;
 
 double cluster_similarity(vector<string> r, int c, output out)
     int num_SC = sizeof(out.Sc);
-    double result = 0
+    double result = 0;
     for(int r2 = 0; r2 < num_SC; r2++){  //for every r' in SC
         result += record_similarity(r, r2); //compute record_sim(r, r')
     return result / num_SC;                 //return average (result divided by num of signatures)
@@ -112,7 +112,7 @@ double cluster_similarity(vector<string> r, int c, output out)
 }
 
 double record_similarity(int r1, int r2){
-    double result = 0
+    double result = 0;
     for(int a = 0; a < r.size(); a++)    //for every attribute a in A
         //result += compute sima(r, r')
     return result / r.size();               //divide computed average by number of attributes
