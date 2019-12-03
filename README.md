@@ -9,7 +9,7 @@ rapidxml.hpp
 rapidxml_print.hpp
 
 Files needed to run the experiment/algorithms:
-algorithm1.cpp
+algorithms.cpp
 dblpWW.txt
 dblp100K.txt
 
