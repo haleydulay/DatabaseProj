@@ -1,10 +1,18 @@
 /*
+-Algo1 S-Phase-
 Input:
 R, a list of records sorted in increasing temporal order.
 0s, a threshold to make merge decision
 Output:
 C, the clustering of records in R
 Sc, the set of cluster signatures corresponding to C, each cluster in C has a signature in Sc.
+-Algo2 E-Phase-
+Input:
+C, the clustering result of the S-phase.
+Sc, the set of cluster signatures associated with C.
+0E, a threshold to determine whether to merge two records.
+Output:
+D, the final clustering result
 */
 
 #include <iostream>
