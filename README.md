@@ -6,7 +6,7 @@ dblp.xml                       Link: https://dblp.uni-trier.de/xml/
 dblp100KParser.cpp
 dblpWWParser.cpp
 rapidxml.hpp
-rapidxml_print.hpp
+**note when parsing the datasets, you must change the path to the rapixml.hpp to the complete file path of where this file is located
 
 Files needed to run the experiment/algorithms:
 algorithms.cpp
