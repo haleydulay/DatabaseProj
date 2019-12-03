@@ -30,7 +30,10 @@ using namespace std;
 
 int placement;
 int maxval = 0;
+int dval = 0;
+int location;
 int counter = 0;
+int dcount = 0;
 
 double record_similarity(vector<string> c, vector<string> d, int j)
 {
@@ -65,16 +68,49 @@ result += record_similarity(r,r2,j);
 	return result;
 }
 
+double dynamic_attribute(vector<string> r, vector<string> r2, int j)
+{
+int know = 0;
+double result = 0;
+	for(int a=0; a<r.size(); a++)
+	{
+		for(int b=0; b<r2.size(); b++)
+		{
+			if(r[a]==r2[b])
+			{
+				result += 1;
+				know += 1;			
+			}	
+		}
+		if(know>dval)
+		{
+		dval = know;
+		location = j;
+		}
+	}
+	know = 0;
+
+	return result / (r.size()+r2.size());
+}
+
 double dynamic_similarity(vector<string> r, vector<string> r2, int j)
 {
 double result = 0;
+result += dynamic_attribute(r,r2,j);
 
+	return result;
 }
 
 int main()
 {
+double F1_Score = 0;
+double Precision = 0;
+double Recall = 0;
+int setting = 0;
+int choice;
 int identifier = 0;
 double threshold = 0.2;
+double d_threshold = 0.05;
 ifstream file;
 int index = 0;
 clock_t beg = 0;
@@ -130,7 +166,7 @@ if(experiment==t1)
     for(int i=0;i<R.size();i++) // for all r in R do    //can change the size to DBLP-WW possibly if not exact # of records
     {
     double test = 0;
-        for(int j=0;j<=counter-1;j++)  	// for all C in C do
+        for(int j=0;j<counter-1;j++)  	// for all C in C do
             storage += cluster_similarity(R[i],Sc[j],j);
 
 	test = cluster_similarity(R[i],Sc[placement],i);
@@ -163,13 +199,93 @@ if(experiment==t1)
 	Scmax.clear();  
     }
 
-// ----------------------------------------------- Algorithm 2 -----------------------------------------------------------------
-/*for(int i=0;i<counter-1;i++)
+cout << "Would you like to view the static phase's clustering result? 0 for No and 1 for Yes: ";
+cin >> choice;
+
+if(choice==1)
 {
-	for(int j=0;j<=counter-1;j++)
-		storage = dynamic_similarity(Sc[i],D[j],j);
-	if(
-}*/
+        for(int i=0;i<counter-1;i++)
+        {
+                for(int j=0;j<C[i].size();j++)
+                        cout << C[i][j] << ", ";
+                cout << endl;
+        }
+cout << endl << "Total clusters are now: " << counter << " instead of 738 original records" << endl;
+}
+
+cout << endl << "Would you like to view the signatures of the static phase's clustering result? 0 for No and 1 for Yes: ";
+cin >> choice;
+
+if(choice==1)
+{
+        for(int i=0;i<counter-1;i++)
+        {
+                for(int j=0;j<Sc[i].size();j++)
+                        cout << Sc[i][j] << ", ";
+                cout << endl;
+        }
+}
+
+
+
+// ----------------------------------------------- Algorithm 2 -----------------------------------------------------------------
+for(int i=0;i<counter-1;i++)		// for all C in C do
+{
+double test = 0;
+	for(int j=0;j<dcount-1;j++)		// for all D in D do
+		storage += dynamic_similarity(C[i],Dc[j],j);		// dynamic similarity
+	
+	test = dynamic_similarity(C[i],Dc[location],i);		// best possible cluster based off dynamic threshold
+
+	cout << test << endl;	
+
+	if(test>=d_threshold)
+	{
+		//Dmax = arg max D in D simd(C,D) = location
+		for(int k=0;k<C[i].size();k++)
+			D[location].push_back(C[i][k]);		// merge to the best 
+		sort(D[location].begin(),D[location].end());
+		D[location].erase(unique(D[location].begin(),D[location].end()),D[location].end());
+		Dc[location].pop_back();
+		Dc[location].push_back(C[i][C[i].size()-1]);	
+	}
+	else
+	{
+		for(int k=0;k<C[i].size();k++)
+			D[setting].push_back(C[i][k]);	// keep the original cluster
+		Dc[setting].push_back(Sc[i][0]);
+		Dc[setting].push_back(Sc[i][Sc[i].size()-1]);
+		dcount++;
+		setting++;
+	}
+}
+
+cout << "Would you like to view the dynamic phase's clustering result? 0 for No and 1 for Yes: ";
+cin >> choice;
+
+if(choice==1)
+{
+	for(int i=0;i<dcount-1;i++)
+	{
+		for(int j=0;j<D[i].size();j++)
+			cout << D[i][j] << ", ";
+		cout << endl;
+	}
+cout << endl << "Total clusters are now: " << dcount << " instead of 738 original records" << endl;
+}
+
+cout << endl << "Would you like to view the signatures of the dynamic phase's clustering result? 0 for No and 1 for Yes: ";
+cin >> choice;
+
+if(choice==1)
+{
+	for(int i=0;i<dcount-1;i++)
+        {
+                for(int j=0;j<Dc[i].size();j++)
+                        cout << Dc[i][j] << ", ";
+                cout << endl;
+        }
+}
 
 return 0;
 }
@@ -195,7 +311,7 @@ else if(experiment==t2)
             {
                 if(file.peek()!='\n')
                 {
-                	getletline(file,line);
+                	getline(file,line);
 			        R[index].push_back(line);    
                 }
                 else
@@ -244,7 +360,6 @@ else if(experiment==t2)
     elapsedtime = (end-beg) / (unsigned long long int)CLOCKS_PER_SEC;       // might be a double & its gonna give seconds i think
     cout << "Scalability experiments on 10% of DBLP-100K had an execution time of about: "<< elapsedtime << " hours" << endl;
 
-    return out;
 }
 */ 
 }
