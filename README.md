@@ -20,7 +20,7 @@ g++ dblpWWParser.cpp
 ./a.out > dblpWW.txt
 
 How to compile and run the program:
-g++ algorithm1.cpp
+g++ algorithms.cpp
 ./a.out
 
 Follow the command prompt once the program is running.
